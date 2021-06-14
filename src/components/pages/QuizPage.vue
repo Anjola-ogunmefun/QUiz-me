@@ -1,7 +1,6 @@
 <template>
   <main class="container">
     <undraw-header></undraw-header>
-
     <!-- use the modal component -->
     <transition name="modal">
       <name-modal v-if="showModal" @close="showModal = false"> </name-modal>
@@ -32,12 +31,15 @@
           <p class="para">Select subject and year below</p>
 
           <transition>
-          <div v-if="timeChecked">
-            <p class="para fadeIn">
-              Your time starts once you click the <strong>START</strong> button
-            </p>
-            <p class="para"><strong>50</strong> minutes is the allotted time</p>
-          </div>
+            <div v-if="timeChecked">
+              <p class="para fadeIn">
+                Your time starts once you click the
+                <strong>START</strong> button
+              </p>
+              <p class="para">
+                <strong>50</strong> minutes is the allotted time
+              </p>
+            </div>
           </transition>
 
           <div class="selection">
@@ -88,10 +90,10 @@
                 </label>
               </div>
 
-               <div class="timer para" v-if="timeChecked && showQuestion">
-            <h3>Time left</h3>
-            {{ prettyTime }}
-          </div>
+              <div class="timer para" v-if="timeChecked && showQuestion">
+                <h3>Time left</h3>
+                {{ prettyTime }}
+              </div>
             </div>
           </div>
         </div>
@@ -240,6 +242,7 @@ import BaseDialog from "../BaseComponents/BaseDialog.vue";
 import NameModal from "../modals/NameModal.vue";
 import WelcomeModal from "../modals/WelcomeModal.vue";
 import ConfirmModal from "../modals/ConfirmModal.vue";
+import BaseButton from "../BaseComponents/BaseButton.vue";
 
 export default {
   components: {
@@ -248,6 +251,7 @@ export default {
     NameModal,
     WelcomeModal,
     ConfirmModal,
+    BaseButton,
   },
   data() {
     return {
@@ -389,8 +393,8 @@ export default {
       }
       return this.index;
     },
-    toggleChecked(){
-      this.timeChecked = !this.timeChecked
+    toggleChecked() {
+      this.timeChecked = !this.timeChecked;
     },
     start() {
       this.timer = setInterval(() => {
@@ -497,21 +501,19 @@ button {
   animation-duration: 1s;
 }
 
-
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
 }
 
-.v-enter-active{
+.v-enter-active {
   text-align: center;
   animation: fadeIn;
   animation-duration: 1s;
-  }
-.v-leave-active{
+}
+.v-leave-active {
   text-align: center;
-  animation: fadeOut; 
+  animation: fadeOut;
   animation-duration: 1s;
 }
-
 </style>
