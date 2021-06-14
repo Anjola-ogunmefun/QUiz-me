@@ -34,4 +34,9 @@
 #undraw{
     margin-bottom: 40px;
 }
+@media only screen and (min-width: 768px) {
+.right {
+  margin-top: 100px;
+}
+}
 </style>

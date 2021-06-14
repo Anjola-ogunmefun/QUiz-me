@@ -49,8 +49,8 @@ export default {
       console.log(this.userName);
     },
     notNow() {
-      localStorage.setItem("userName", 'Friend');
-      this.userName = 'Friend'
+      localStorage.setItem("userName", 'User');
+      this.userName = 'User'
       this.$emit('close')
     },
   },
@@ -93,5 +93,12 @@ export default {
 .modal-leave-active .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+@media only screen and (min-width: 768px) {
+ .modal-container{
+   width: 450px;
+ }
+ 
 }
 </style>

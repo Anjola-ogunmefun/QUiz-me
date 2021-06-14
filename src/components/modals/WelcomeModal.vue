@@ -27,13 +27,6 @@ export default {
   methods:{
     saveName() {
       localStorage.setItem("userName", this.userName);
-      this.$forceUpdate();
-      // if (this.userName === "") {
-      //   this.greet = false;
-      // } else {
-      //   this.greet = true;
-      // }
-      console.log(this.userName);
     },
   },
 
@@ -86,5 +79,12 @@ export default {
 
   animation: fadeOut; 
   animation-duration: 1s;
+}
+
+@media only screen and (min-width: 768px) {
+ .modal-container{
+   width: 450px;
+ }
+ 
 }
 </style>

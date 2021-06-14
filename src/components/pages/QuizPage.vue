@@ -76,14 +76,13 @@
                 </select>
               </div>
 
-              <div class="form-check">
+              <div class="form-check" v-if="!showQuestion">
                 <input
                   class="form-check-input"
                   type="checkbox"
                   :value="timeChecked"
                   id="time"
                   @click="toggleChecked"
-                  :disabled="!!showQuestion"
                 />
                 <label class="form-check-label" for="time">
                   Would you like a timed Quiz?
@@ -238,20 +237,16 @@
 <script>
 import axios from "axios";
 import ScoreBoard from "../modals/ScoreBoard.vue";
-import BaseDialog from "../BaseComponents/BaseDialog.vue";
 import NameModal from "../modals/NameModal.vue";
 import WelcomeModal from "../modals/WelcomeModal.vue";
 import ConfirmModal from "../modals/ConfirmModal.vue";
-import BaseButton from "../BaseComponents/BaseButton.vue";
 
 export default {
   components: {
     ScoreBoard,
-    BaseDialog,
     NameModal,
     WelcomeModal,
     ConfirmModal,
-    BaseButton,
   },
   data() {
     return {
@@ -353,6 +348,7 @@ export default {
       this.showQuestion = true;
       this.isLoading = true;
       this.score = 0;
+      this.index = 0;
 
       try {
         const response = await axios.get(
@@ -362,7 +358,10 @@ export default {
         this.questions = response.data.data;
         console.log(this.questions[this.index]);
         this.options = this.questions[this.index].option;
-        this.start();
+        if (this.timeChecked) {
+          this.time = 3000;
+          this.start();
+        }
         let i;
         for (i = 0; i < this.questions.length; i++) {
           this.answers.push(this.questions[i].answer);
@@ -379,15 +378,16 @@ export default {
       }
     },
     nextQuestion() {
-      if (this.index >= 0 && this.index < this.questions.length) {
+      console.log("index", this.index);
+      if (this.index >= 0 && this.index !== 39) {
         this.index++;
         this.options = this.questions[this.index].option;
       } else {
-        this.index;
+        this.endQuiz();
       }
     },
     prevQuestion() {
-      if (this.index > 0 && this.index <= this.questions.length) {
+      if (this.index > 0 && this.index < this.questions.length) {
         this.index--;
         this.options = this.questions[this.index].option;
       }
@@ -397,14 +397,16 @@ export default {
       this.timeChecked = !this.timeChecked;
     },
     start() {
-      this.timer = setInterval(() => {
-        if (this.time > 0) {
-          this.time--;
-        } else {
-          clearInterval(this.timer);
-          this.stop();
-        }
-      }, 1000);
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          if (this.time > 0) {
+            this.time--;
+          } else {
+            clearInterval(this.timer);
+            this.stop();
+          }
+        }, 1000);
+      }
     },
     stop() {
       this.timer = null;
@@ -415,8 +417,6 @@ export default {
       this.end = true;
       this.confirmModal = false;
       this.calculateScore();
-      console.log(this.score);
-      console.log("end");
     },
     handleError() {
       this.error = null;
@@ -426,11 +426,6 @@ export default {
     userName(val) {
       this.userName = val;
     },
-  },
-  provide() {
-    return {
-      endQuiz: this.endQuiz,
-    };
   },
 };
 </script>

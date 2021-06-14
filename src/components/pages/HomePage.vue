@@ -4,7 +4,7 @@
     <section id="about">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 down">
             <h1 class="heading">Quiz me</h1>
 
             <p class="lead">
@@ -12,11 +12,11 @@
               questions to prepare adequately for your UTME, WASSCE and
               POST-UTME
             </p>
-            <p class="lead">
+            <!-- <p class="lead">
               there’s room for everyone to exert themselves, test their ideas,
               and go wrong. This allows you to figure out what you know, what
               you don’t, what you need to focus on, and how to improve.
-            </p>
+            </p> -->
             <p class="lead">
               The app can be used anytime, anywhere, at home, work, or even on
               the go on multiple devices – whether that’s a smartphone, tablet,
@@ -54,7 +54,7 @@
           <div class="col-md-6">
             <h1 class="heading">Want to get the best out of Quiz me?</h1>
             <p class="lead">
-              We recommend that students take the folloeing steps in order to
+              We recommend that students take the following steps in order to
               maximize Quize me;
             </p>
             <ul>
@@ -83,12 +83,14 @@
         <div class="row">
           <div class="col-12">
             <h3><strong>We are ready whenever You are!</strong></h3>
-            <base-button to="/quiz" class="btn-primary put">Take Quiz</base-button>
+            <base-button to="/quiz" class="btn-primary put"
+              >Take Quiz</base-button
+            >
           </div>
         </div>
       </div>
     </section>
-    
+
     <undraw-footer></undraw-footer>
   </main>
 </template>
@@ -99,7 +101,7 @@
 }
 
 main {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 body {
@@ -150,5 +152,9 @@ body {
     margin-top: 60px;
   }
 }
-
+@media only screen and (min-width: 768px) {
+  .down {
+    margin-top: 150px;
+  }
+}
 </style>

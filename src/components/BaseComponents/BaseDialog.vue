@@ -52,7 +52,6 @@ dialog {
   }
 }
 
-
 .modal-enter-active {
     animation: slide-fade 0.5s ease-out;
 }
