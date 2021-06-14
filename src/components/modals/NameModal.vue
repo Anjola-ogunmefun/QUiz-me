@@ -6,7 +6,7 @@
             <h3>Welcome to Quiz Me!</h3>
           </div>
 
-          <div class="modal-body">
+          <div class="modal-body text-center">
             <div>
               <p>What would you like to be called?</p>
               <input type="text" id="userName" v-model.trim="userName" />
@@ -97,7 +97,7 @@ export default {
 
 @media only screen and (min-width: 768px) {
  .modal-container{
-   width: 450px;
+   width: 500px;
  }
  
 }

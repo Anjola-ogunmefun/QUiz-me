@@ -2,8 +2,8 @@
   <div id="modal-template">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-header">
-            Welcome {{ userName }}
+          <div class="modal-body">
+            <p class="text-center">Welcome {{ userName }}</p>
             </div>
           <div class="modal-footer">
             <button
@@ -48,14 +48,6 @@ export default {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
-}
-
-.modal-body {
-  margin: 20px 0;
-}
 
 .modal-default-button {
   float: right;
@@ -83,8 +75,10 @@ export default {
 
 @media only screen and (min-width: 768px) {
  .modal-container{
-   width: 450px;
+   width: 500px;
  }
- 
+ p {
+   font-size: 25px;
+ }
 }
 </style>

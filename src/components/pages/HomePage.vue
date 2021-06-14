@@ -128,7 +128,7 @@ body {
 }
 
 .put {
-  margin-left: auto;
+  float: right;
 }
 
 /* Extra small devices (phones, 600px and down) */

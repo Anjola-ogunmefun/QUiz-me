@@ -3,11 +3,11 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-body text-center">Are you sure you want to  end Quiz?</div>
+          <div class="modal-body text-center">Are you sure you want to restart Quiz?</div>
             <button class="btn btn-sm btn-warning" @click="$emit('close')">
             No
           </button>
-          <button class="modal-default-button btn btn-sm btn-success" @click="$emit('end')">
+          <button class="modal-default-button btn btn-sm btn-success" @click="$emit('refresh')">
             Yes
           </button>
         </div>
@@ -47,7 +47,6 @@
   transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
-
 
 .modal-body {
   margin: 20px 0;

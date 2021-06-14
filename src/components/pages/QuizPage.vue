@@ -20,8 +20,15 @@
         v-if="confirmModal"
         @close="confirmModal = false"
         @end="endQuiz()"
-        :userName="userName"
       ></confirm-modal>
+    </transition>
+
+      <transition name="modal">
+      <refresh-modal
+        v-if="refreshModal"
+        @close="refreshModal = false"
+        @refresh="recall"
+      ></refresh-modal>
     </transition>
 
     <section id="selections" v-if="!showModal">
@@ -221,7 +228,7 @@
                 to="/quiz"
                 class="btn-sm btn-outline-warning"
                 v-if="showQuestion"
-                @click="fetchQuestion()"
+                @click="refreshModal = true"
               >
                 Reset
               </base-button>
@@ -240,6 +247,7 @@ import ScoreBoard from "../modals/ScoreBoard.vue";
 import NameModal from "../modals/NameModal.vue";
 import WelcomeModal from "../modals/WelcomeModal.vue";
 import ConfirmModal from "../modals/ConfirmModal.vue";
+import RefreshModal from"../modals/RefreshModal.vue";
 
 export default {
   components: {
@@ -247,6 +255,7 @@ export default {
     NameModal,
     WelcomeModal,
     ConfirmModal,
+    RefreshModal
   },
   data() {
     return {
@@ -272,6 +281,7 @@ export default {
       showModal: true,
       welcomeModal: false,
       confirmModal: false,
+      refreshModal:false,
       timeChecked: false,
       time: 3000,
       timer: null,
@@ -334,13 +344,8 @@ export default {
         if (res !== undefined) {
           this.attemptedQuestions++;
         }
-        console.log("res", res);
-        console.log("attempt", this.attemptedQuestions);
-        console.log("endAnswer", this.questions[this.index].answer);
         if (this.questions[index].answer === res) {
-          console.log("answer", res);
           this.score = this.score + 1;
-          console.log("score", this.score);
         }
       });
     },
@@ -366,7 +371,6 @@ export default {
         for (i = 0; i < this.questions.length; i++) {
           this.answers.push(this.questions[i].answer);
         }
-        console.log("answers", this.answers);
 
         this.isLoading = false;
         if (this.questions[this.index].section !== "") {
@@ -378,7 +382,6 @@ export default {
       }
     },
     nextQuestion() {
-      console.log("index", this.index);
       if (this.index >= 0 && this.index !== 39) {
         this.index++;
         this.options = this.questions[this.index].option;
@@ -395,6 +398,11 @@ export default {
     },
     toggleChecked() {
       this.timeChecked = !this.timeChecked;
+    },
+    recall(){
+      this.refreshModal = false;
+      this.chosenAnswers = [];
+      this.fetchQuestion()
     },
     start() {
       if (!this.timer) {
