@@ -51,7 +51,7 @@
             />
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 down">
             <h1 class="heading">Get Practicing in 4 easy steps</h1>
             <ul>
               <li class="lead">
@@ -139,6 +139,9 @@ body {
 }
 #ready h3 {
   text-align: center;
+}
+ul {
+  padding-left:4rem
 }
 
 .put {
