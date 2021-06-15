@@ -3,7 +3,7 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-body text-center">Are you sure you want to  end Quiz?</div>
+          <div class="modal-body text-center">Are you sure you want to submit Quiz?</div>
             <button class="btn btn-sm btn-warning" @click="$emit('close')">
             No
           </button>

@@ -23,7 +23,7 @@
       ></confirm-modal>
     </transition>
 
-      <transition name="modal">
+    <transition name="modal">
       <refresh-modal
         v-if="refreshModal"
         @close="refreshModal = false"
@@ -58,10 +58,10 @@
                   aria-label="select subject"
                   :disabled="showQuestion"
                 >
-                  <option selected>Subject</option>
+                  <option selected>Select Subject</option>
 
                   <option v-for="subject in subjects" :key="subject[0]">{{
-                    subject
+                    subject.charAt(0).toUpperCase() + subject.slice(1)
                   }}</option>
                 </select>
               </div>
@@ -73,7 +73,7 @@
                   aria-label="select year"
                   :disabled="showQuestion"
                 >
-                  <option selected>Year</option>
+                  <option selected>Select Subject Year</option>
                   <option
                     v-for="year in years"
                     :key="year[0]"
@@ -132,9 +132,10 @@
                 <p v-if="section !== null">
                   <strong>{{ questions[index].section }}</strong>
                 </p>
-
-                <strong>{{ index + 1 }}.</strong><span>&nbsp; &nbsp;</span
-                >{{ questions[index].question }}
+                <div style="display: inline">
+                  <strong>{{ index + 1 }}.</strong><span>&nbsp; &nbsp;</span>
+                </div>
+                  <p v-html="questions[index].question" style="display: inline"></p>
 
                 <ul>
                   <li v-for="(value, ind) in options" :key="ind">
@@ -190,7 +191,7 @@
               <base-button
                 to="/quiz"
                 class="btn-sm btn-primary"
-                v-if="showQuestion"
+                v-if="showQuestion && index !== 0"
                 @click="prevQuestion"
               >
                 Previous</base-button
@@ -201,7 +202,7 @@
               <base-button
                 to="/quiz"
                 class="btn-sm btn-primary"
-                v-if="showQuestion"
+                v-if="showQuestion && index !== 39"
                 @click="nextQuestion"
                 >Next</base-button
               >
@@ -247,7 +248,7 @@ import ScoreBoard from "../modals/ScoreBoard.vue";
 import NameModal from "../modals/NameModal.vue";
 import WelcomeModal from "../modals/WelcomeModal.vue";
 import ConfirmModal from "../modals/ConfirmModal.vue";
-import RefreshModal from"../modals/RefreshModal.vue";
+import RefreshModal from "../modals/RefreshModal.vue";
 
 export default {
   components: {
@@ -255,12 +256,13 @@ export default {
     NameModal,
     WelcomeModal,
     ConfirmModal,
-    RefreshModal
+    RefreshModal,
   },
   data() {
     return {
       subjects: null,
       selectedSubject: "",
+      capitalSubjects: null,
       selectedYear: "",
       years: null,
       questions: "",
@@ -281,7 +283,7 @@ export default {
       showModal: true,
       welcomeModal: false,
       confirmModal: false,
-      refreshModal:false,
+      refreshModal: false,
       timeChecked: false,
       time: 3000,
       timer: null,
@@ -309,9 +311,7 @@ export default {
       this.showModal = true;
       this.welcomeModal = false;
     }
-    setTimeout(() => {
-      this.welcomeModal = false;
-    }, 4000);
+
     try {
       const response = await axios.get(
         "https://questions.aloc.ng/api/metrics/list-subjects"
@@ -324,7 +324,7 @@ export default {
   },
   methods: {
     async selectSubject(event) {
-      this.selectedSubject = event.target.value;
+      this.selectedSubject = event.target.value.toLowerCase();
       try {
         const response = await axios.get(
           `https://questions.aloc.ng/api/metrics/years-available-for/${this.selectedSubject}`
@@ -354,6 +354,8 @@ export default {
       this.isLoading = true;
       this.score = 0;
       this.index = 0;
+      this.chosenAnswers = [];
+      this.attemptedQuestions = 0;
 
       try {
         const response = await axios.get(
@@ -399,10 +401,11 @@ export default {
     toggleChecked() {
       this.timeChecked = !this.timeChecked;
     },
-    recall(){
+    recall() {
       this.refreshModal = false;
       this.chosenAnswers = [];
-      this.fetchQuestion()
+      this.attemptedQuestions = 0;
+      this.fetchQuestion();
     },
     start() {
       if (!this.timer) {

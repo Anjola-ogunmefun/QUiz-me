@@ -52,6 +52,20 @@
           </div>
 
           <div class="col-md-6">
+            <h1 class="heading">Get Practicing in 4 easy steps</h1>
+            <ul>
+              <li class="lead">
+                Select a subject 
+              </li>
+              <li class="lead">
+                Select subject year
+              </li>
+              <li class="lead">Choose a timed quiz or not</li>
+              <li class="lead">Click START!</li>
+            </ul>
+          </div>
+
+          <!-- <div class="col-md-6">
             <h1 class="heading">Want to get the best out of Quiz me?</h1>
             <p class="lead">
               We recommend that students take the following steps in order to
@@ -73,7 +87,7 @@
                 Ask yourself how you can improve on the next exam.
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>

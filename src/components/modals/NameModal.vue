@@ -7,11 +7,11 @@
           </div>
 
           <div class="modal-body text-center">
-            <div>
+            <div >
               <p>What would you like to be called?</p>
-              <input type="text" id="userName" v-model.trim="userName" />
             </div>
-  
+                <input type="text" id="userName" style="height:50px !important; margin-left: -10px" v-model.trim="userName" />
+
           </div>
           <div class="modal-footer">
             <button
@@ -59,13 +59,14 @@ export default {
 
 <style scoped>
 .modal-container {
-  width: 250px;
+  width: 260px;
   margin-left: auto;
   margin-right: auto;
   margin-top: -5rem;
   padding: 20px 30px;
   background-color: #fff;
   border-radius: 2px;
+  align-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
