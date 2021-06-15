@@ -15,7 +15,7 @@
               class="img-fluid road"
               alt="road to knowledge"
             />
-            <base-button to="/home" class="btn-sm btn-outline-primary right">Home</base-button>
+            <base-button to="/home" class="btn-sm btn-outline-primary right" style="margin-bottom: 30px">Home</base-button>
           </div>
         </div>
       </div>
