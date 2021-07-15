@@ -48,6 +48,8 @@
    display: flex;
    justify-content: center;
  }
- 
+ .footer {
+  font-size: x-large;
+}
 }
 </style>

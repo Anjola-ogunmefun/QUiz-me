@@ -6,7 +6,7 @@
             <h3>Welcome to Quiz Me!</h3>
           </div>
 
-          <div class="modal-body text-center">
+          <div class="modal-body text-center big">
             <div >
               <p>What would you like to be called?</p>
             </div>
@@ -15,13 +15,13 @@
           </div>
           <div class="modal-footer">
             <button
-              class="btn btn-sm btn-primary"
+              class="btn btn-sm btn-primary big"
               @click="saveName"
             >
               save
             </button>
             <button
-              class="modal-default-button btn btn-sm btn-warning"
+              class="modal-default-button btn btn-sm btn-warning big"
               @click="notNow"
             >
               Not now
@@ -100,6 +100,8 @@ export default {
  .modal-container{
    width: 500px;
  }
- 
+  .big{
+   font-size: large;
+ }
 }
 </style>

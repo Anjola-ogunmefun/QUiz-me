@@ -3,11 +3,11 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-body text-center">Are you sure you want to restart Quiz?</div>
-            <button class="btn btn-sm btn-warning" @click="$emit('close')">
+          <div class="modal-body text-center big">Are you sure you want to restart Quiz?</div>
+            <button class="btn btn-sm btn-warning big" @click="$emit('close')">
             No
           </button>
-          <button class="modal-default-button btn btn-sm btn-success" @click="$emit('refresh')">
+          <button class="modal-default-button btn btn-sm btn-success big" @click="$emit('refresh')">
             Yes
           </button>
         </div>
@@ -70,6 +70,8 @@
  .modal-container{
    width: 500px;
  }
- 
+  .big{
+   font-size: x-large;
+ }
 }
 </style>

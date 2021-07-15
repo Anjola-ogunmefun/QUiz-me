@@ -12,11 +12,6 @@
               questions to prepare adequately for your UTME, WASSCE and
               POST-UTME
             </p>
-            <!-- <p class="lead">
-              there’s room for everyone to exert themselves, test their ideas,
-              and go wrong. This allows you to figure out what you know, what
-              you don’t, what you need to focus on, and how to improve.
-            </p> -->
             <p class="lead">
               The app can be used anytime, anywhere, at home, work, or even on
               the go on multiple devices – whether that’s a smartphone, tablet,
@@ -27,7 +22,7 @@
           </div>
 
           <div class="col-md-6">
-            <base-button to="/quiz" class="btn-primary">Take Quiz</base-button>
+            <base-button to="/quiz" class="btn-primary take">Take Quiz</base-button>
 
             <img
               src="../../utils/undraw_book_lover_mkck.svg"
@@ -64,30 +59,6 @@
               <li class="lead">Click START!</li>
             </ul>
           </div>
-
-          <!-- <div class="col-md-6">
-            <h1 class="heading">Want to get the best out of Quiz me?</h1>
-            <p class="lead">
-              We recommend that students take the following steps in order to
-              maximize Quize me;
-            </p>
-            <ul>
-              <li class="lead">
-                Carve out a quiet test-taking spot with minimal distractions
-              </li>
-              <li class="lead">
-                Gather all that you’ll need to take the test.
-              </li>
-              <li class="lead">Take a deep breath!</li>
-              <li class="lead">Keep an eye on the clock.</li>
-              <li class="lead">Don’t leave the test page!</li>
-              <li class="lead">Check your work before you submit it.</li>
-              <li class="lead">Check your grade.</li>
-              <li class="lead">
-                Ask yourself how you can improve on the next exam.
-              </li>
-            </ul>
-          </div> -->
         </div>
       </div>
     </section>
@@ -95,9 +66,9 @@
     <section id="ready">
       <div class="container">
         <div class="row">
-          <div class="col-12">
-            <h3><strong>We are ready whenever You are!</strong></h3>
-            <base-button to="/quiz" class="btn-primary put"
+          <div class="col-12 text-center">
+            <h2><strong>We are ready whenever You are!</strong></h2>
+            <base-button to="/quiz" class="btn-primary take"
               >Take Quiz</base-button
             >
           </div>
@@ -137,15 +108,15 @@ body {
 #usage {
   margin-bottom: 30px;
 }
-#ready h3 {
+#ready h2 {
   text-align: center;
+  margin-bottom: 40px;
+}
+#ready{
+  margin-top: 100px;
 }
 ul {
   padding-left:4rem
-}
-
-.put {
-  float: right;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -168,10 +139,16 @@ ul {
     margin-right: 40px;
     margin-top: 60px;
   }
+  p,li,.take{
+    font-size: x-large;
+  }
 }
 @media only screen and (min-width: 768px) {
   .down {
     margin-top: 150px;
+  }
+   p,li,.take{
+    font-size: x-large;
   }
 }
 </style>

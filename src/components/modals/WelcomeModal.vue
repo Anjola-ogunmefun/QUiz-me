@@ -7,12 +7,12 @@
             </div>
           <div class="modal-footer">
             <button
-              class="btn btn-sm btn-primary"
+              class="btn btn-sm btn-primary big"
               @click="$emit('name-modal')"
             >
               Add name
             </button>
-            <button class="btn btn-sm btn-primary" @click="$emit('close')">
+            <button class="btn btn-sm btn-primary big" @click="$emit('close')">
               Ok
             </button>
           </div>
@@ -80,5 +80,9 @@ export default {
  p {
    font-size: 25px;
  }
+ .big{
+   font-size: large;
+ }
+ 
 }
 </style>

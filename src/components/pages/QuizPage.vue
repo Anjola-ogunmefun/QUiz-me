@@ -2,48 +2,52 @@
   <main class="container">
     <undraw-header></undraw-header>
     <!-- use the modal component -->
-    <transition name="modal">
-      <name-modal v-if="showModal" @close="showModal = false"> </name-modal>
-    </transition>
+      <transition name="modal">
+        <name-modal v-if="showModal" @close="showModal = false"> </name-modal>
+      </transition>
 
-    <transition name="modal">
-      <welcome-modal
-        v-if="welcomeModal && !showModal"
-        @close="welcomeModal = false"
-        @name-modal="showModal = true"
-        :userName="userName"
-      ></welcome-modal>
-    </transition>
+      <transition name="modal">
+        <welcome-modal
+          v-if="welcomeModal && !showModal"
+          @close="welcomeModal = false"
+          @name-modal="showModal = true"
+          :userName="userName"
+        ></welcome-modal>
+      </transition>
 
-    <transition name="modal">
-      <confirm-modal
-        v-if="confirmModal"
-        @close="confirmModal = false"
-        @end="endQuiz()"
-      ></confirm-modal>
-    </transition>
+    <teleport to="body">
+      <transition name="modal">
+        <confirm-modal
+          v-if="confirmModal"
+          @close="confirmModal = false"
+          @end="endQuiz()"
+        ></confirm-modal>
+      </transition>
+    </teleport>
 
-    <transition name="modal">
-      <refresh-modal
-        v-if="refreshModal"
-        @close="refreshModal = false"
-        @refresh="recall"
-      ></refresh-modal>
-    </transition>
+    <teleport to="body">
+      <transition name="modal">
+        <refresh-modal
+          v-if="refreshModal"
+          @close="refreshModal = false"
+          @refresh="recall"
+        ></refresh-modal>
+      </transition>
+    </teleport>
 
     <section id="selections" v-if="!showModal">
       <div class="container">
         <div class="row">
           <h2 class="text-center">Get Started!</h2>
-          <p class="para">Select subject and year below</p>
+          <p class="para take">Select subject and year below</p>
 
           <transition>
             <div v-if="timeChecked">
-              <p class="para fadeIn">
+              <p class="para fadeIn take">
                 Your time starts once you click the
                 <strong>START</strong> button
               </p>
-              <p class="para">
+              <p class="para take">
                 <strong>50</strong> minutes is the allotted time
               </p>
             </div>
@@ -91,7 +95,7 @@
                   id="time"
                   @click="toggleChecked"
                 />
-                <label class="form-check-label" for="time">
+                <label class="form-check-label take" for="time">
                   Would you like a timed Quiz?
                 </label>
               </div>
@@ -111,7 +115,7 @@
         <div class="row col-12">
           <base-button
             to="/quiz"
-            class="btn-success"
+            class="btn-success take"
             @click="fetchQuestion"
             v-if="isActive && !showQuestion"
             >Start</base-button
@@ -128,14 +132,17 @@
 
             <ol v-else-if="showQuestion && questions && !isLoading">
               <h2>Question {{ index + 1 }} of {{ questions.length }}</h2>
-              <li class="unstyle">
+              <li class="unstyle take">
                 <p v-if="section !== null">
                   <strong>{{ questions[index].section }}</strong>
                 </p>
                 <div style="display: inline">
                   <strong>{{ index + 1 }}.</strong><span>&nbsp; &nbsp;</span>
                 </div>
-                  <p v-html="questions[index].question" style="display: inline"></p>
+                <p
+                  v-html="questions[index].question"
+                  style="display: inline"
+                ></p>
 
                 <ul>
                   <li v-for="(value, ind) in options" :key="ind">
@@ -190,7 +197,7 @@
             <div class="col-6 right">
               <base-button
                 to="/quiz"
-                class="btn-sm btn-primary"
+                class="btn-sm btn-primary take"
                 v-if="showQuestion && index !== 0"
                 @click="prevQuestion"
               >
@@ -201,7 +208,7 @@
             <div class="col-4 offset-2 ">
               <base-button
                 to="/quiz"
-                class="btn-sm btn-primary"
+                class="btn-sm btn-primary take"
                 v-if="showQuestion && index !== 39"
                 @click="nextQuestion"
                 >Next</base-button
@@ -217,7 +224,7 @@
             <div class="col-6 right">
               <base-button
                 to="/quiz"
-                class="btn-sm btn-outline-success"
+                class="btn-sm btn-outline-success take"
                 v-if="showQuestion"
                 @click="confirmModal = true"
                 >Submit</base-button
@@ -227,7 +234,7 @@
             <div class="col-4 offset-2">
               <base-button
                 to="/quiz"
-                class="btn-sm btn-outline-warning"
+                class="btn-sm btn-outline-warning take"
                 v-if="showQuestion"
                 @click="refreshModal = true"
               >
@@ -363,7 +370,7 @@ export default {
         );
 
         this.questions = response.data.data;
-        console.log(this.questions[this.index]);
+    
         this.options = this.questions[this.index].option;
         if (this.timeChecked) {
           this.time = 3000;
@@ -442,6 +449,16 @@ export default {
 </script>
 
 <style scoped>
+main {
+  font-family: "Times New Roman", Times, serif;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
 #question {
   margin: 5px 20px;
 }
@@ -521,5 +538,21 @@ button {
   text-align: center;
   animation: fadeOut;
   animation-duration: 1s;
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  select,.take{
+    font-size: x-large;
+  }
+.right{
+  margin-left: 120px;
+}
+}
+@media only screen and (min-width: 768px) {
+   select,.take{
+    font-size: x-large;
+  }
 }
 </style>
